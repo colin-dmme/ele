@@ -3,85 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yêu Cầu Đăng Nhập</title>
+    <title>Yêu Cầu Đăng Nhập Google</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <style>
         /* Reset và thiết lập cơ bản */
         html, body {
             height: 100%;
             margin: 0;
             padding: 0;
-            font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif; /* Font chữ hiện đại, dễ đọc */
-            display: flex; /* Sử dụng Flexbox để căn giữa */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            display: flex; /* Dùng Flexbox để căn giữa */
             justify-content: center; /* Căn giữa ngang */
             align-items: center;   /* Căn giữa dọc */
-            min-height: 100vh;     /* Chiều cao tối thiểu bằng chiều cao màn hình */
-            text-align: center;    /* Căn giữa chữ */
-            background-color: #f7f7f7; /* Màu nền nhẹ */
-            color: #333;           /* Màu chữ chính */
+            text-align: center; /* Căn giữa nội dung text */
+            background-color: #f8f9fa; /* Màu nền nhẹ */
+            color: #333; /* Màu chữ chính */
+            box-sizing: border-box;
         }
 
-        /* Khối chứa nội dung */
-        .content-box {
-            background-color: #ffffff; /* Nền trắng cho khối nội dung */
-            padding: 30px 40px;      /* Tăng khoảng đệm */
-            border-radius: 8px;      /* Bo góc mềm mại */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Thêm bóng đổ nhẹ */
-            max-width: 500px;        /* Chiều rộng tối đa */
-            width: 90%;              /* Chiều rộng linh hoạt */
-            box-sizing: border-box;  /* Padding và border tính vào kích thước */
+        /* Định dạng vùng chứa nội dung */
+        .content-wrapper {
+            padding: 20px 30px; /* Khoảng đệm trong */
+            max-width: 90%; /* Chiều rộng tối đa, tránh quá rộng trên màn hình lớn */
+            display: flex; /* Sắp xếp icon và text */
+            flex-direction: column; /* Xếp chồng lên nhau (icon trên, text dưới) */
+            align-items: center; /* Căn giữa các mục theo chiều ngang */
         }
 
-        /* Định dạng đoạn văn bản thông báo */
-        .message {
-            font-size: 1.15em; /* Kích thước chữ */
-            line-height: 1.6;   /* Giãn dòng */
-            margin-bottom: 25px; /* Khoảng cách dưới */
-            color: #555;
-        }
-
-        /* Định dạng nút đăng nhập Google (giả lập) */
-        .google-login-button {
-            display: inline-block; /* Để áp dụng padding đúng */
-            background-color: #4285F4; /* Màu xanh đặc trưng của Google */
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 4px;
-            font-size: 1em;
-            font-weight: 500;
-            cursor: pointer;
-            text-decoration: none; /* Bỏ gạch chân nếu dùng thẻ <a> */
-            transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Hiệu ứng chuyển động mượt */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .google-login-button:hover {
-            background-color: #357ae8; /* Màu đậm hơn khi hover */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
-        }
-
-        /* Tùy chọn: Thêm icon Google đơn giản bằng SVG (không cần file ngoài) */
+        /* Định dạng icon Google */
         .google-icon {
-             display: inline-block;
-             vertical-align: middle; /* Căn giữa icon với chữ */
-             width: 18px;
-             height: 18px;
-             margin-right: 10px; /* Khoảng cách với chữ */
-             background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2048%2048%22%3E%3Cpath%20fill%3D%22%23EA4335%22%20d%3D%22M24%209.5c3.21%200%206.02%201.12%208.27%202.95l6.4-6.4C34.97%202.48%2029.82%200%2024%200%2014.88%200%207.21%205.38%203.06%2012.8l7.33%205.69C12.06%2013.03%2017.53%209.5%2024%209.5z%22%2F%3E%3Cpath%20fill%3D%22%234285F4%22%20d%3D%22M46.94%2024.5c0-1.56-.14-3.06-.4-4.5H24v8.51h12.8c-.55%202.77-2.16%205.12-4.56%206.75l7.33%205.69c4.28-3.95%206.77-9.64%206.77-16.45z%22%2F%3E%3Cpath%20fill%3D%22%23FBBC05%22%20d%3D%22M10.39%2028.49c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.33-5.69C1.16%2016.73%200%2020.29%200%2024s1.16%207.27%203.06%2010.21l7.33-5.72z%22%2F%3E%3Cpath%20fill%3D%22%2334A853%22%20d%3D%22M24%2048c6.48%200%2011.93-2.13%2015.91-5.79l-7.33-5.69c-2.16%201.45-4.92%202.3-8.58%202.3-6.47%200-11.94-4.36-13.85-10.31l-7.33%205.69C7.21%2042.62%2014.88%2048%2024%2048z%22%2F%3E%3Cpath%20fill%3D%22none%22%20d%3D%22M0%200h48v48H0z%22%2F%3E%3C%2Fsvg%3E');
-             background-size: contain;
-             background-repeat: no-repeat;
+            font-size: 2.5em; /* Kích thước icon lớn hơn */
+            color: #DB4437; /* Màu đỏ đặc trưng của Google */
+            margin-bottom: 15px; /* Khoảng cách giữa icon và text */
         }
+
+        /* Định dạng text thông báo */
+        .message-text {
+            font-size: 1.1em; /* Kích thước chữ */
+            line-height: 1.6; /* Giãn dòng */
+            color: #555; /* Màu chữ hơi tối hơn một chút */
+        }
+
+        /* Không cần nút bấm theo yêu cầu */
 
     </style>
 </head>
 <body>
-    <div class="content-box">
-        <p class="message">
+    <div class="content-wrapper">
+        <i class="fab fa-google google-icon"></i>
+
+        <p class="message-text">
             Đăng nhập bằng tài khoản Google để sử dụng toàn bộ các tính năng.
         </p>
-        <a href="#" class="google-login-button">
-            <span class="google-icon"></span> Đăng nhập với Google
-        </a>
-        </div>
+    </div>
 </body>
 </html>
